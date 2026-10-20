@@ -31,7 +31,7 @@
 ### 从 GitHub 装（推荐尝鲜）
 
 ```powershell
-dsh plugin --profile desktop add github:<owner>/dsh-edge-bridge
+dsh plugin --profile desktop add github:zbc200205-spec/dsh-edge-bridge
 ```
 
 ### 从 npm 装
