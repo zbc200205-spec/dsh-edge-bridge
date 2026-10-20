@@ -1,4 +1,4 @@
-# 交接说明：dsh-edge-bridge 0.2.0
+# 交接说明：dsh-edge-bridge 0.2.1
 
 这是一个给 DeepSeek Harness（DSH）用的插件，装好后你的 agent 可以直接操作你正在用的
 Microsoft Edge：读页面内容、点按钮、填表单、滚动、截图（14 个 `edge_*` 工具）。
@@ -18,8 +18,10 @@ Microsoft Edge：读页面内容、点按钮、填表单、滚动、截图（14 
 
 路径改成你实际解压的位置。你的 agent 会自己找到 DSH 的 profile 目录。
 
-**第 3 步**：agent 会告诉你「请重启一次 DeepSeek Harness」。重启即可，重启后
-让它按 `AGENT-INSTALL.md` 第 3 步自检，看到 **扩展已连上桥 ✔** 就是装好了。
+**第 3 步**：agent 装完会自己自检，看到 **扩展已连上桥 ✔** 就是装好了。
+
+要不要重启 DSH？**多数情况不用**：DSH 会自己发现 profile 变了，几秒内重新加载插件。
+agent 会通过自检查版本确认；只有工具没出现或版本还是旧的，才需要重启一次。
 
 ---
 
@@ -27,9 +29,10 @@ Microsoft Edge：读页面内容、点按钮、填表单、滚动、截图（14 
 
 | 它做的事 | 说明 |
 | --- | --- |
-| 往 DSH 的 profile 目录里放一个插件包 | `node_modules/dsh-edge-bridge`，以及 `vendor/dsh-edge-bridge-0.2.0.tgz` |
+| 往 DSH 的 profile 目录里放一个插件包 | `node_modules/dsh-edge-bridge`，以及 `vendor/dsh-edge-bridge-0.2.1.tgz` |
 | 在 profile 的 `package.json` 里加两条登记 | 一个依赖项 + 一个 `dsh.profile.bundles` 条目；**改动前会备份** |
-| 让你重启一次 DSH | agent 自己不能重启（它跑在 DSH 里面） |
+| 用 DSH 自带的 pnpm 跑一次 `install` | 让登记进 `pnpm-lock.yaml`。**不做这步，下次 pnpm 装任何插件都可能把它挤掉** |
+| 一般不重启；必要时请重启一次 | agent 自己不能重启（它跑在 DSH 里面），所以重启要你动手 |
 
 它**不会**做这些：不动你的浏览器设置、不动 profile 里的其它插件、不联网装依赖
 （这个插件是零依赖的，只用 Node 自带模块）。
@@ -63,8 +66,9 @@ Microsoft Edge：读页面内容、点按钮、填表单、滚动、截图（14 
 
 > 按 `AGENT-INSTALL.md` 的「失败对照表」排查这次的问题。
 
-那张表覆盖了实际遇到过的全部情况：重启后工具不存在、`duplicate loader entry id`、
-`edge_status` 报 lossless JSON、扩展没连上、扩展被禁用、端口被占用。每一条都写了原因和下一步。
+那张表覆盖了实际遇到过的全部情况：工具不存在、`duplicate loader entry id`、
+`edge_status` 报 lossless JSON、加载的是旧副本、扩展没连上、扩展被禁用、截图拿到旧画面、
+端口探测范围、以及漏了 `pnpm install` 导致插件被挤掉。每一条都写了原因和下一步。
 
 ---
 
@@ -85,8 +89,8 @@ Microsoft Edge：读页面内容、点按钮、填表单、滚动、截图（14 
 | --- | --- |
 | `AGENT-INSTALL.md` | **给你的 agent 的执行说明**（目标、步骤、自检、失败对照表、回滚） |
 | `dsh-edge-bridge/` | 插件源码，内含 Edge 扩展 `edge-extension/` |
-| `dsh-edge-bridge-0.2.0.tgz` | 与上面同一份内容的安装包；agent 若走 `dsh plugin add` 就用它 |
+| `dsh-edge-bridge-0.2.1.tgz` | 与上面同一份内容的安装包；agent 若走 `dsh plugin add` 就用它 |
 | `HANDOVER.md` / `README.txt` | 就是本文（两份内容相同，`.txt` 双击即可用记事本打开） |
 | `CHANGELOG.md` | 这个版本改了什么 |
 
-版本 0.2.0 · 未在除 Windows + Edge 之外的平台验证过
+版本 0.2.1 · 未在除 Windows + Edge 之外的平台验证过

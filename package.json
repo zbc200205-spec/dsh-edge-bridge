@@ -1,6 +1,6 @@
 {
   "name": "dsh-edge-bridge",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "用 DSH 驱动 Edge：本机 WebSocket 桥 + MV3 扩展，提供 edge_* 工具做页面快照、点击、输入、截图。",
   "type": "module",
   "main": "lib/index.js",
