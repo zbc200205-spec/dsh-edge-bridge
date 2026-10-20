@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>DSH Edge Bridge</title>
+    <style>
+      :root { color-scheme: light dark; }
+      body { font: 13px/1.6 system-ui, "Segoe UI", "Microsoft YaHei", sans-serif; margin: 0; padding: 14px; width: 320px; }
+      h1 { font-size: 14px; margin: 0 0 8px; display: flex; justify-content: space-between; align-items: center; }
+      label { display: block; margin: 8px 0 2px; font-size: 12px; opacity: .8; }
+      input[type="text"], input[type="number"] { width: 100%; box-sizing: border-box; font: inherit; padding: 4px 6px; border-radius: 6px; border: 1px solid #8886; background: transparent; color: inherit; }
+      .row { display: flex; gap: 8px; align-items: center; margin-top: 10px; }
+      button { font: inherit; padding: 4px 10px; border-radius: 6px; border: 1px solid #8886; background: transparent; color: inherit; cursor: pointer; }
+      button:hover { background: #8882; }
+      .pill { padding: 1px 8px; border-radius: 999px; font-size: 11px; background: #8883; }
+      .pill.ok { background: #16a34a33; color: #15803d; }
+      .pill.bad { background: #dc262633; color: #b91c1c; }
+      .pill.wait { background: #f59e0b33; color: #b45309; }
+      .muted { opacity: .7; font-size: 12px; }
+      #hint { margin-top: 8px; font-size: 12px; min-height: 18px; }
+    </style>
+  </head>
+  <body>
+    <h1>DSH Edge Bridge <span class="pill" id="state">…</span></h1>
+    <label>桥端口</label>
+    <input id="port" type="number" min="1" max="65535" />
+    <label>桥基址（留空用 http://127.0.0.1:端口）</label>
+    <input id="url" type="text" placeholder="http://127.0.0.1:17373" />
+    <label>浏览器标签（多浏览器时用于区分）</label>
+    <input id="label" type="text" placeholder="edge-default" />
+    <div class="row">
+      <input id="persistent" type="checkbox" />
+      <span>打开常驻桥接页（更稳）</span>
+    </div>
+    <div class="row">
+      <button id="save">保存并重连</button>
+      <button id="reconnect">重连</button>
+      <button id="tab">打开桥接页</button>
+    </div>
+    <div id="hint" class="muted"></div>
+    <script src="popup.js"></script>
+  </body>
+</html>

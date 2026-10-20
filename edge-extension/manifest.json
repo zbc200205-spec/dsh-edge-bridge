@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "DSH Edge Bridge",
+  "version": "0.2.0",
+  "description": "让 DeepSeek Harness 通过本机 WebSocket 桥操控 Edge：读取页面、点击、输入、按键、滚动、截图。",
+  "minimum_chrome_version": "116",
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "DSH Edge Bridge"
+  },
+  "permissions": [
+    "tabs",
+    "scripting",
+    "storage",
+    "alarms",
+    "debugger",
+    "webNavigation"
+  ],
+  "host_permissions": ["<all_urls>"],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' http://127.0.0.1:* http://localhost:* ws://127.0.0.1:* ws://localhost:*"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["inject/agent.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

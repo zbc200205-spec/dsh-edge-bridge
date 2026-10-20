@@ -1,0 +1,55 @@
+{
+  "name": "dsh-edge-bridge",
+  "version": "0.2.0",
+  "description": "用 DSH 驱动 Edge：本机 WebSocket 桥 + MV3 扩展，提供 edge_* 工具做页面快照、点击、输入、截图。",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./bridge": "./lib/bridge.mjs",
+    "./tools": "./lib/tools.mjs",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "bin",
+    "edge-extension",
+    "cordis.patch.yml",
+    "README.md",
+    "HANDOVER.md",
+    "AGENT-INSTALL.md",
+    "CHANGELOG.md"
+  ],
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "edge",
+    "browser-automation",
+    "extension",
+    "websocket",
+    "cdp"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zbc200205-spec/dsh-edge-bridge.git"
+  },
+  "homepage": "https://github.com/zbc200205-spec/dsh-edge-bridge#readme",
+  "bugs": {
+    "url": "https://github.com/zbc200205-spec/dsh-edge-bridge/issues"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "start": "node bin/edge-bridge.mjs"
+  }
+}

@@ -1,0 +1,16 @@
+# 依赖 / 构建产物
+node_modules/
+dist/
+*.tgz
+*.zip
+
+# 运行期落盘（插件默认把截图写到会话工作区的 .dsh-edge/）
+.dsh-edge/
+*.log
+
+# 编辑器 / 系统
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+.DS_Store
